@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-md mx-auto space-y-6">
+    
+    <!-- Header with Back Button -->
+    <div class="flex items-center gap-4">
+        <a href="{{ url_for('index') }}" class="bg-white p-2 rounded-xl shadow-sm text-gray-800 font-bold border-2 border-gray-200 hover:bg-gray-50 active:bg-gray-100 flex items-center gap-2">
+            ⬅ Kembali
+        </a>
+        <div class="text-center flex-1 pr-10">
+            <h2 class="text-2xl font-extrabold text-gray-800">Buku Saku</h2>
+            <p class="text-gray-500 text-sm">Panduan aeroponik</p>
+        </div>
+    </div>
+
+    <!-- How to use -->
+    <div class="bg-white p-5 rounded-2xl shadow-lg border-t-4 border-brand">
+        <h3 class="font-bold text-lg text-gray-800 mb-4 border-b pb-2">Cara Penggunaan Aplikasi</h3>
+        
+        <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+                <div class="bg-brand-light text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shrink-0">1</div>
+                <div>
+                    <strong class="block text-gray-800">Ukur Tinggi Tanaman</strong>
+                    <span class="text-sm text-gray-600">Ukur dari pangkal netpot hingga ujung daun tertinggi. Gunakan tombol [ + ] atau [ - ].</span>
+                </div>
+            </li>
+            <li class="flex items-start gap-3">
+                <div class="bg-brand-light text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shrink-0">2</div>
+                <div>
+                    <strong class="block text-gray-800">Hitung Jumlah Daun</strong>
+                    <span class="text-sm text-gray-600">Hitung hanya daun yang sudah mekar sempurna, abaikan pucuk kecil.</span>
+                </div>
+            </li>
+            <li class="flex items-start gap-3">
+                <div class="bg-brand-light text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shrink-0">3</div>
+                <div>
+                    <strong class="block text-gray-800">Ambil Foto</strong>
+                    <span class="text-sm text-gray-600">Foto tanaman dari jarak sekitar 20cm dengan pencahayaan terang.</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Environment Standards -->
+    <div class="bg-blue-50 p-5 rounded-2xl shadow-lg border-t-4 border-blue-400">
+        <h3 class="font-bold text-lg text-blue-800 mb-3">Lingkungan Ideal Bayam</h3>
+        <div class="grid grid-cols-2 gap-4">
+            <div class="bg-white p-3 rounded-xl shadow-sm text-center">
+                <div class="text-2xl mb-1">🌡️</div>
+                <div class="font-bold text-gray-800">18 - 28°C</div>
+                <div class="text-xs text-gray-500">Suhu Udara</div>
+            </div>
+            <div class="bg-white p-3 rounded-xl shadow-sm text-center">
+                <div class="text-2xl mb-1">💧</div>
+                <div class="font-bold text-gray-800">50 - 60%</div>
+                <div class="text-xs text-gray-500">Kelembapan</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Support -->
+    <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20butuh%20bantuan%20tentang%20Aeroponik" target="_blank" class="block w-full bg-green-500 hover:bg-green-600 text-white text-center font-bold text-lg py-4 rounded-xl shadow-lg transition-transform transform active:scale-95 flex items-center justify-center gap-2">
+        <span class="text-2xl">💬</span>
+        Hubungi Pendamping Desa
+    </a>
+
+</div>
+{% endblock %}
