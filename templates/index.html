@@ -47,7 +47,10 @@
             <label class="block text-sm font-bold text-gray-700 mb-2">Foto Kondisi Tanaman</label>
             <label for="foto" class="flex flex-col items-center justify-center w-full h-24 border-2 border-dashed border-brand bg-green-50 rounded-xl cursor-pointer hover:bg-green-100 transition-colors active:bg-green-200">
                 <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                    <span class="text-4xl mb-2">📷</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 mb-2 text-brand-dark">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />
+                    </svg>
                     <p class="text-sm font-bold text-brand-dark" id="fotoLabel">Ketuk untuk Memotret</p>
                 </div>
                 <input id="foto" name="foto" type="file" accept="image/*" capture="environment" class="hidden" onchange="updateFileName(this)" />
@@ -57,12 +60,13 @@
         <!-- Submit Button -->
         <button type="submit" id="submitBtn" class="w-full bg-brand hover:bg-brand-dark text-white text-xl font-extrabold py-5 rounded-xl shadow-lg transition-transform transform active:scale-95 flex items-center justify-center gap-2">
             <span>Simpan & Cek Kondisi</span>
-            <span>✨</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
         </button>
 
         <!-- Lihat Riwayat Button -->
         <a href="{{ url_for('logs') }}" class="w-full block text-center bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-4 rounded-xl active:bg-gray-400 transition-colors">
-            Lihat Riwayat Pencatatan 📋
+            Lihat Riwayat Pencatatan
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 inline-block ml-1"><path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a2.25 2.25 0 01-2.25 2.25H10.5a2.25 2.25 0 01-2.25-2.25v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184" /></svg>
         </a>
 
     </form>
@@ -102,7 +106,7 @@
     function updateFileName(input) {
         const label = document.getElementById('fotoLabel');
         if (input.files && input.files.length > 0) {
-            label.textContent = "Foto siap dikirim! ✅";
+            label.innerHTML = `Foto siap dikirim! <svg class="w-5 h-5 inline text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>`;
             label.classList.replace('text-brand-dark', 'text-green-700');
         } else {
             label.textContent = "Ketuk untuk Memotret";
@@ -116,7 +120,7 @@
         
         const btn = document.getElementById('submitBtn');
         const originalText = btn.innerHTML;
-        btn.innerHTML = 'Memproses... ⏳';
+        btn.innerHTML = '<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Memproses...';
         btn.disabled = true;
         
         const formData = new FormData(this);
@@ -157,19 +161,19 @@
         if (skor === 'Hijau') {
             panel.classList.add('bg-green-50', 'border-green-500');
             title.className = "text-2xl font-black text-green-700";
-            icon.innerHTML = "🟢";
+            icon.innerHTML = '<svg class="w-12 h-12 text-green-500" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10"/></svg>';
             title.textContent = "Optimal!";
             message.textContent = "Mantap! Bayam tumbuh subur. Teruskan perawatan rutin Anda.";
         } else if (skor === 'Kuning') {
             panel.classList.add('bg-yellow-50', 'border-yellow-500');
             title.className = "text-2xl font-black text-yellow-700";
-            icon.innerHTML = "🟡";
+            icon.innerHTML = '<svg class="w-12 h-12 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10"/></svg>';
             title.textContent = "Perhatian";
             message.textContent = "Tumbuh agak lambat. Cek kelancaran air dan pastikan lingkungan tidak terlalu panas.";
         } else {
             panel.classList.add('bg-red-50', 'border-red-600');
             title.className = "text-2xl font-black text-red-700";
-            icon.innerHTML = "🔴";
+            icon.innerHTML = '<svg class="w-12 h-12 text-red-500" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10"/></svg>';
             title.textContent = "Kritis!";
             message.textContent = "Darurat! Segera periksa semprotan air dan pastikan akar tidak mengering atau busuk.";
         }

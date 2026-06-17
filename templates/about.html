@@ -6,7 +6,8 @@
     <!-- Header with Back Button -->
     <div class="flex items-center gap-4">
         <a href="{{ url_for('index') }}" class="bg-white p-2 rounded-xl shadow-sm text-gray-800 font-bold border-2 border-gray-200 hover:bg-gray-50 active:bg-gray-100 flex items-center gap-2">
-            ⬅ Kembali
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" /></svg>
+            Kembali
         </a>
         <div class="text-center flex-1 pr-10">
             <h2 class="text-2xl font-extrabold text-gray-800">Buku Saku</h2>
@@ -48,12 +49,12 @@
         <h3 class="font-bold text-lg text-blue-800 mb-3">Lingkungan Ideal Bayam</h3>
         <div class="grid grid-cols-2 gap-4">
             <div class="bg-white p-3 rounded-xl shadow-sm text-center">
-                <div class="text-2xl mb-1">🌡️</div>
+                <div class="text-2xl mb-1 font-black text-red-500">°C</div>
                 <div class="font-bold text-gray-800">18 - 28°C</div>
                 <div class="text-xs text-gray-500">Suhu Udara</div>
             </div>
             <div class="bg-white p-3 rounded-xl shadow-sm text-center">
-                <div class="text-2xl mb-1">💧</div>
+                <div class="text-2xl mb-1 font-black text-blue-500">%</div>
                 <div class="font-bold text-gray-800">50 - 60%</div>
                 <div class="text-xs text-gray-500">Kelembapan</div>
             </div>
@@ -62,7 +63,7 @@
 
     <!-- Contact Support -->
     <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20butuh%20bantuan%20tentang%20Aeroponik" target="_blank" class="block w-full bg-green-500 hover:bg-green-600 text-white text-center font-bold text-lg py-4 rounded-xl shadow-lg transition-transform transform active:scale-95 flex items-center justify-center gap-2">
-        <span class="text-2xl">💬</span>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z" /></svg>
         Hubungi Pendamping Desa
     </a>
 
