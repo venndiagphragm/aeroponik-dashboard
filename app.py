@@ -49,6 +49,10 @@ def on_startup():
     if not os.environ.get("VERCEL"):
         os.makedirs("instance", exist_ok=True)
     Base.metadata.create_all(bind=engine)
+    
+    # Auto-seed baseline data
+    from seed import seed_data
+    seed_data()
 
 
 # ─── Scoring Logic ───

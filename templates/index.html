@@ -121,6 +121,20 @@
 
 {% block scripts %}
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const batchSelect = document.getElementById('batch_id');
+        if (batchSelect && batchSelect.options.length > 1) {
+            // First option is the placeholder if > 1 items, but wait, the placeholder is at index 0.
+            // Oh wait, my change below will adjust the placeholder. Let's just check if a value is selected.
+            if (!batchSelect.value) {
+                batchSelect.selectedIndex = 1; // Select the first real batch
+            }
+            onBatchChange();
+        } else if (batchSelect && batchSelect.value) {
+            onBatchChange();
+        }
+    });
+
     // ─── Batch Change Handler ───
     function onBatchChange() {
         const batchId = document.getElementById('batch_id').value;
