@@ -5,13 +5,26 @@
     
     <!-- Header with Back Button -->
     <div class="flex items-center gap-4">
-        <a href="{{ url_for('index') }}" class="bg-white p-2 rounded-xl shadow-sm text-gray-800 font-bold border-2 border-gray-200 hover:bg-gray-50 active:bg-gray-100 flex items-center gap-2">
+        <a href="/" class="bg-white p-2 rounded-xl shadow-sm text-gray-800 font-bold border-2 border-gray-200 hover:bg-gray-50 active:bg-gray-100 flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" /></svg>
             Kembali
         </a>
         <div class="text-center flex-1 pr-10">
-            <h2 class="text-xl font-extrabold text-gray-800">Riwayat Pencatatan</h2>
+            <h1 class="text-xl font-extrabold text-gray-800">Riwayat Pencatatan</h1>
         </div>
+    </div>
+
+    <!-- Batch Filter -->
+    <div class="bg-white p-3 rounded-xl shadow-sm border border-gray-200">
+        <label class="block text-xs font-bold text-gray-500 mb-1">Filter Batch</label>
+        <select id="batchFilter" onchange="filterByBatch()" class="w-full bg-gray-50 border border-gray-200 text-gray-800 font-semibold text-sm rounded-lg p-2 focus:outline-none focus:border-brand">
+            <option value="">Semua Batch</option>
+            {% for batch in batches %}
+            <option value="{{ batch.id }}" {% if selected_batch_id and selected_batch_id == batch.id %}selected{% endif %}>
+                {{ batch.nama_batch }} ({{ batch.media_tanam }})
+            </option>
+            {% endfor %}
+        </select>
     </div>
 
     <!-- Logs List -->
@@ -26,12 +39,20 @@
                 <div>
                     <h3 class="font-bold text-lg text-gray-800">Hari ke-{{ log.hari_ke }}</h3>
                     <p class="text-xs text-gray-500">{{ log.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+                    {% if log.batch %}
+                    <p class="text-xs text-blue-500 font-semibold mt-0.5">{{ log.batch.nama_batch }}</p>
+                    {% endif %}
                 </div>
-                <div class="font-black text-lg 
-                    {% if log.skor_sistem == 'Hijau' %}text-green-600
-                    {% elif log.skor_sistem == 'Kuning' %}text-yellow-600
-                    {% else %}text-red-600{% endif %}">
-                    {{ log.skor_sistem }}
+                <div class="text-right">
+                    <div class="font-black text-lg 
+                        {% if log.skor_sistem == 'Hijau' %}text-green-600
+                        {% elif log.skor_sistem == 'Kuning' %}text-yellow-600
+                        {% else %}text-red-600{% endif %}">
+                        {{ log.skor_sistem }}
+                    </div>
+                    {% if log.skor_numerik %}
+                    <div class="text-xs text-gray-500 font-semibold">{{ log.skor_numerik }}/100</div>
+                    {% endif %}
                 </div>
             </div>
             
@@ -48,7 +69,7 @@
 
             {% if log.path_foto %}
             <div class="mt-2">
-                <img src="{{ url_for('static', filename=log.path_foto) }}" alt="Foto Hari ke-{{ log.hari_ke }}" class="w-full h-40 object-cover rounded-xl border border-gray-200">
+                <img src="/static/{{ log.path_foto }}" alt="Foto Hari ke-{{ log.hari_ke }}" class="w-full h-40 object-cover rounded-xl border border-gray-200">
             </div>
             {% endif %}
         </div>
@@ -60,4 +81,17 @@
         {% endfor %}
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function filterByBatch() {
+        const batchId = document.getElementById('batchFilter').value;
+        if (batchId) {
+            window.location.href = `/logs?batch_id=${batchId}`;
+        } else {
+            window.location.href = '/logs';
+        }
+    }
+</script>
 {% endblock %}

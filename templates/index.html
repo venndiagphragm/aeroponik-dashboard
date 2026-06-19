@@ -5,22 +5,51 @@
     
     <!-- Title -->
     <div class="text-center">
-        <h2 class="text-xl font-extrabold text-gray-800">Catat Harian</h2>
-        <p class="text-gray-500 text-sm">Pilih hari dan sesuaikan angka</p>
+        <h1 class="text-xl font-extrabold text-gray-800">Catat Harian</h1>
+        <p class="text-gray-500 text-sm">Pilih batch dan sesuaikan angka</p>
     </div>
+
+    {% if batches|length == 0 %}
+    <!-- No Active Batches -->
+    <div class="text-center p-8 bg-yellow-50 rounded-2xl border-2 border-dashed border-yellow-300">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12 mx-auto mb-3 text-yellow-500">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+        </svg>
+        <p class="text-yellow-700 font-bold text-lg mb-2">Belum Ada Batch Aktif</p>
+        <p class="text-yellow-600 text-sm mb-4">Buat batch tanam terlebih dahulu sebelum mencatat data harian.</p>
+        <a href="/batches" class="inline-block bg-brand hover:bg-brand-dark text-white font-bold py-3 px-6 rounded-xl shadow-lg transition-transform transform active:scale-95">
+            + Buat Batch Baru
+        </a>
+    </div>
+    {% else %}
 
     <!-- Form -->
     <form id="logForm" class="bg-white p-5 rounded-2xl shadow-lg space-y-6">
         
-        <!-- Hari Ke -->
+        <!-- Batch Selector -->
         <div>
-            <label class="block text-sm font-bold text-gray-700 mb-2">Umur Tanaman (Hari ke-)</label>
-            <select name="hari_ke" id="hari_ke" class="w-full bg-gray-100 border-2 border-gray-200 text-gray-800 font-bold text-xl rounded-xl p-4 focus:outline-none focus:border-brand transition-colors">
-                {% for i in range(1, 30) %}
-                <option value="{{ i }}">Hari ke-{{ i }}</option>
+            <label class="block text-sm font-bold text-gray-700 mb-2">Batch Tanam</label>
+            <select name="batch_id" id="batch_id" onchange="onBatchChange()" class="w-full bg-gray-100 border-2 border-gray-200 text-gray-800 font-bold text-lg rounded-xl p-4 focus:outline-none focus:border-brand transition-colors">
+                <option value="" disabled selected>-- Pilih Batch --</option>
+                {% for batch in batches %}
+                <option value="{{ batch.id }}" data-tanggal="{{ batch.tanggal_mulai }}">
+                    {{ batch.nama_batch }} ({{ batch.media_tanam }} · {{ batch.nozzle_size }}mm)
+                </option>
                 {% endfor %}
             </select>
         </div>
+
+        <!-- Batch Info Badge (hidden until batch selected) -->
+        <div id="batchInfo" class="hidden bg-blue-50 border border-blue-200 rounded-xl p-3 flex items-center justify-between">
+            <div>
+                <span class="text-xs text-blue-600 font-semibold">Hari ke-</span>
+                <span id="hariKeDisplay" class="text-2xl font-black text-blue-800">-</span>
+            </div>
+            <div class="text-right">
+                <span id="batchDetailDisplay" class="text-xs text-blue-600"></span>
+            </div>
+        </div>
+        <input type="hidden" name="hari_ke" id="hari_ke" value="1">
 
         <!-- Tinggi Tanaman -->
         <div>
@@ -64,18 +93,22 @@
         </button>
 
         <!-- Lihat Riwayat Button -->
-        <a href="{{ url_for('logs') }}" class="w-full block text-center bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-4 rounded-xl active:bg-gray-400 transition-colors">
+        <a href="/logs" class="w-full block text-center bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-4 rounded-xl active:bg-gray-400 transition-colors">
             Lihat Riwayat Pencatatan
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 inline-block ml-1"><path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a2.25 2.25 0 01-2.25 2.25H10.5a2.25 2.25 0 01-2.25-2.25v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184" /></svg>
         </a>
 
     </form>
+    {% endif %}
 
     <!-- Feedback Panel (Hidden by default) -->
     <div id="feedbackPanel" class="hidden p-6 rounded-2xl shadow-xl border-l-8 transition-all duration-500 ease-in-out transform translate-y-4 opacity-0">
         <div class="flex items-center gap-4 mb-3">
             <div id="feedbackIcon" class="text-5xl"></div>
-            <h3 id="feedbackTitle" class="text-2xl font-black"></h3>
+            <div>
+                <h3 id="feedbackTitle" class="text-2xl font-black"></h3>
+                <p id="feedbackScore" class="text-sm font-semibold text-gray-500"></p>
+            </div>
         </div>
         <p id="feedbackMessage" class="text-lg font-medium text-gray-700 leading-relaxed"></p>
         <button type="button" onclick="resetForm()" class="mt-6 w-full py-3 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold rounded-xl active:bg-gray-400 transition-colors">
@@ -88,7 +121,26 @@
 
 {% block scripts %}
 <script>
-    // JS for + / - buttons
+    // ─── Batch Change Handler ───
+    function onBatchChange() {
+        const batchId = document.getElementById('batch_id').value;
+        if (!batchId) return;
+        
+        fetch(`/api/batch/${batchId}/hari_ke`)
+            .then(r => r.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    document.getElementById('hari_ke').value = data.hari_ke;
+                    document.getElementById('hariKeDisplay').textContent = data.hari_ke;
+                    document.getElementById('batchDetailDisplay').innerHTML = 
+                        `Mulai: ${data.tanggal_mulai}<br>${data.media_tanam} · ${data.nozzle_size}mm`;
+                    document.getElementById('batchInfo').classList.remove('hidden');
+                }
+            })
+            .catch(err => console.error('Error fetching batch info:', err));
+    }
+
+    // ─── +/- Buttons ───
     function adjustValue(inputId, amount) {
         const input = document.getElementById(inputId);
         let current = parseFloat(input.value);
@@ -98,11 +150,10 @@
         // Prevent negative values
         if (newValue < 0) newValue = 0;
         
-        // Update value safely
         input.value = (inputId === 'daun') ? Math.round(newValue) : newValue.toFixed(1);
     }
 
-    // Update camera label
+    // ─── Camera Label Update ───
     function updateFileName(input) {
         const label = document.getElementById('fotoLabel');
         if (input.files && input.files.length > 0) {
@@ -114,10 +165,17 @@
         }
     }
 
-    // AJAX Form Submit
-    document.getElementById('logForm').addEventListener('submit', function(e) {
+    // ─── AJAX Form Submit ───
+    document.getElementById('logForm')?.addEventListener('submit', function(e) {
         e.preventDefault();
         
+        // Validate batch selected
+        const batchId = document.getElementById('batch_id').value;
+        if (!batchId) {
+            alert('Pilih batch tanam terlebih dahulu.');
+            return;
+        }
+
         const btn = document.getElementById('submitBtn');
         const originalText = btn.innerHTML;
         btn.innerHTML = '<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Memproses...';
@@ -125,15 +183,14 @@
         
         const formData = new FormData(this);
         
-        fetch('{{ url_for("submit_log") }}', {
+        fetch('/submit_log', {
             method: 'POST',
             body: formData
         })
         .then(response => response.json())
         .then(data => {
             if(data.status === 'success') {
-                showFeedback(data.skor);
-                // Hide form
+                showFeedback(data.skor, data.skor_numerik);
                 document.getElementById('logForm').classList.add('hidden');
             } else {
                 alert("Terjadi kesalahan: " + data.message);
@@ -149,14 +206,17 @@
         });
     });
 
-    function showFeedback(skor) {
+    function showFeedback(skor, skorNumerik) {
         const panel = document.getElementById('feedbackPanel');
         const icon = document.getElementById('feedbackIcon');
         const title = document.getElementById('feedbackTitle');
         const message = document.getElementById('feedbackMessage');
+        const score = document.getElementById('feedbackScore');
         
         // Reset classes
         panel.className = "p-6 rounded-2xl shadow-xl border-l-8 transition-all duration-500 ease-in-out transform translate-y-0 opacity-100 block";
+        
+        score.textContent = `Skor: ${skorNumerik}/100`;
         
         if (skor === 'Hijau') {
             panel.classList.add('bg-green-50', 'border-green-500');
@@ -187,8 +247,6 @@
         // Reset photo
         document.getElementById('foto').value = '';
         updateFileName(document.getElementById('foto'));
-        
-        // Increment day implicitly? Let's just let the user see the form again.
     }
 </script>
 {% endblock %}

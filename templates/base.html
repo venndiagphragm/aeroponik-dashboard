@@ -5,9 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Aeroponik - Pantau Aeroponik</title>
     
+    <!-- SEO Meta -->
+    <meta name="description" content="Aeroponik Dashboard - Buku saku digital untuk pemantauan tanaman aeroponik harian. Sistem penilaian otomatis berbasis data riset.">
+    
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#1E3A8A">
-    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <link rel="manifest" href="/static/manifest.json">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -47,12 +50,17 @@
     
     <!-- Top Navigation -->
     <nav class="bg-brand text-white p-4 shadow-md flex justify-between items-center shrink-0 border-b-4 border-brand-accent">
-        <a href="{{ url_for('index') }}" class="text-2xl font-bold tracking-wide flex items-center gap-2">
-            <img src="{{ url_for('static', filename='unair_logo.png') }}" alt="Logo Unair" class="h-8 w-auto"> Aeroponik
+        <a href="/" class="text-2xl font-bold tracking-wide flex items-center gap-2">
+            <img src="/static/unair_logo.png" alt="Logo Unair" class="h-8 w-auto"> Aeroponik
         </a>
-        <a href="{{ url_for('about') }}" class="text-white bg-brand-dark px-3 py-1 rounded-full text-sm font-semibold shadow-inner">
-            Bantuan ?
-        </a>
+        <div class="flex items-center gap-2">
+            <a href="/batches" class="text-white bg-brand-light px-3 py-1 rounded-full text-sm font-semibold shadow-inner">
+                Batch
+            </a>
+            <a href="/about" class="text-white bg-brand-dark px-3 py-1 rounded-full text-sm font-semibold shadow-inner">
+                Bantuan ?
+            </a>
+        </div>
     </nav>
 
     <!-- Main Content Area -->
@@ -64,7 +72,7 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register("{{ url_for('static', filename='service-worker.js') }}")
+                navigator.serviceWorker.register("/static/service-worker.js")
                 .then(reg => console.log('Service Worker registered'))
                 .catch(err => console.log('Service Worker registration failed: ', err));
             });
