@@ -26,8 +26,14 @@ app = FastAPI(
 
 # Static files & templates
 BASE_DIR = Path(__file__).resolve().parent
-UPLOAD_DIR = BASE_DIR / "static" / "uploads"
-UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+
+if os.environ.get("VERCEL"):
+    UPLOAD_DIR = Path("/tmp/uploads")
+    UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+    app.mount("/static/uploads", StaticFiles(directory=str(UPLOAD_DIR)), name="static_uploads")
+else:
+    UPLOAD_DIR = BASE_DIR / "static" / "uploads"
+    UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
 templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
@@ -40,7 +46,8 @@ MAX_UPLOAD_SIZE = 16 * 1024 * 1024
 @app.on_event("startup")
 def on_startup():
     """Create tables on startup if they don't exist."""
-    os.makedirs("instance", exist_ok=True)
+    if not os.environ.get("VERCEL"):
+        os.makedirs("instance", exist_ok=True)
     Base.metadata.create_all(bind=engine)
 
 

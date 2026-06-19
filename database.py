@@ -3,7 +3,11 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, DeclarativeBase, Session
 from typing import Generator
 
-DATABASE_URL = "sqlite:///./instance/bayamin.db"
+# Cek apakah dijalankan di Vercel (read-only system)
+if os.environ.get("VERCEL"):
+    DATABASE_URL = "sqlite:////tmp/bayamin.db"
+else:
+    DATABASE_URL = "sqlite:///./instance/bayamin.db"
 
 engine = create_engine(
     DATABASE_URL,
