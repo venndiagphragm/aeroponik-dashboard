@@ -68,7 +68,8 @@ def interpolate_daily(days: list, values: list) -> dict:
 def seed_data():
     """Seed the database with baseline growth data and ensure tables exist."""
     # Ensure instance directory exists
-    os.makedirs('instance', exist_ok=True)
+    if not os.environ.get("VERCEL"):
+        os.makedirs('instance', exist_ok=True)
     
     # Create all tables
     Base.metadata.create_all(bind=engine)
