@@ -118,14 +118,21 @@ def calculate_score(tinggi: float, daun: int, hari_ke: int, db: Session) -> tupl
 # ═══════════════════════════════════════════════════
 
 @app.get("/", response_class=HTMLResponse)
-def index(request: Request, db: Session = Depends(get_db)):
-    """Home page — daily log form with batch selector."""
+def landing_page(request: Request):
+    """Landing page — introduces the project and gives clear CTA."""
+    return templates.TemplateResponse("landing.html", {"request": request})
+
+
+@app.get("/catat", response_class=HTMLResponse)
+def catat(request: Request, batch_id: int = None, db: Session = Depends(get_db)):
+    """Daily log form with batch selector."""
     active_batches = db.query(BatchTanam).filter_by(status='aktif').order_by(
         BatchTanam.created_at.desc()
     ).all()
-    return templates.TemplateResponse("index.html", {
+    return templates.TemplateResponse("catat.html", {
         "request": request,
         "batches": active_batches,
+        "preselected_batch_id": batch_id,
     })
 
 

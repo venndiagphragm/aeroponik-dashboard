@@ -2,11 +2,15 @@
 
 {% block content %}
 <div class="max-w-md mx-auto space-y-6">
-    
+
     <!-- Header with Back Button -->
     <div class="flex items-center gap-4">
-        <a href="/" class="bg-white p-2 rounded-xl shadow-sm text-gray-800 font-bold border-2 border-gray-200 hover:bg-gray-50 active:bg-gray-100 flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" /></svg>
+        <a href="/"
+            class="bg-white p-2 rounded-xl shadow-sm text-gray-800 font-bold border-2 border-gray-200 hover:bg-gray-50 active:bg-gray-100 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+            </svg>
             Kembali
         </a>
         <div class="text-center flex-1 pr-10">
@@ -18,34 +22,46 @@
     <!-- How to use -->
     <div class="bg-white p-5 rounded-2xl shadow-lg border-t-4 border-brand">
         <h2 class="font-bold text-lg text-gray-800 mb-4 border-b pb-2">Cara Penggunaan Aplikasi</h2>
-        
+
         <ul class="space-y-4">
             <li class="flex items-start gap-3">
-                <div class="bg-brand-light text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shrink-0">1</div>
+                <div
+                    class="bg-brand-light text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shrink-0">
+                    1</div>
                 <div>
                     <strong class="block text-gray-800">Buat Batch Tanam</strong>
-                    <span class="text-sm text-gray-600">Buka halaman Batch, isi nama dan tanggal mulai tanam. Nozzle 0.1mm & Rockwool sudah preset.</span>
+                    <span class="text-sm text-gray-600">Buka halaman Batch, isi nama dan tanggal mulai tanam. Nozzle
+                        0.4mm & Rockwool sudah preset.</span>
                 </div>
             </li>
             <li class="flex items-start gap-3">
-                <div class="bg-brand-light text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shrink-0">2</div>
+                <div
+                    class="bg-brand-light text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shrink-0">
+                    2</div>
                 <div>
                     <strong class="block text-gray-800">Ukur Tinggi Tanaman</strong>
-                    <span class="text-sm text-gray-600">Ukur dari pangkal netpot hingga ujung daun tertinggi. Gunakan tombol [ + ] atau [ - ].</span>
+                    <span class="text-sm text-gray-600">Ukur dari pangkal netpot hingga ujung daun tertinggi. Gunakan
+                        tombol [ + ] atau [ - ].</span>
                 </div>
             </li>
             <li class="flex items-start gap-3">
-                <div class="bg-brand-light text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shrink-0">3</div>
+                <div
+                    class="bg-brand-light text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shrink-0">
+                    3</div>
                 <div>
                     <strong class="block text-gray-800">Hitung Jumlah Daun</strong>
-                    <span class="text-sm text-gray-600">Hitung hanya daun yang sudah mekar sempurna, abaikan pucuk kecil.</span>
+                    <span class="text-sm text-gray-600">Hitung hanya daun yang sudah mekar sempurna, abaikan pucuk
+                        kecil.</span>
                 </div>
             </li>
             <li class="flex items-start gap-3">
-                <div class="bg-brand-light text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shrink-0">4</div>
+                <div
+                    class="bg-brand-light text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shrink-0">
+                    4</div>
                 <div>
                     <strong class="block text-gray-800">Ambil Foto</strong>
-                    <span class="text-sm text-gray-600">Foto tanaman dari jarak sekitar 20cm dengan pencahayaan terang.</span>
+                    <span class="text-sm text-gray-600">Foto tanaman dari jarak sekitar 20cm dengan pencahayaan
+                        terang.</span>
                 </div>
             </li>
         </ul>
@@ -73,7 +89,7 @@
                 <div class="w-4 h-4 rounded-full bg-red-500 shrink-0"></div>
                 <div>
                     <strong class="text-red-700">Kritis (< 50)</strong>
-                    <p class="text-xs text-gray-600">Kondisi darurat, segera periksa sistem aeroponik.</p>
+                            <p class="text-xs text-gray-600">Kondisi darurat, segera periksa sistem aeroponik.</p>
                 </div>
             </div>
         </div>
@@ -102,7 +118,7 @@
         <div class="grid grid-cols-2 gap-4">
             <div class="bg-white p-3 rounded-xl shadow-sm text-center">
                 <div class="text-2xl mb-1">💨</div>
-                <div class="font-bold text-gray-800">0.1 mm</div>
+                <div class="font-bold text-gray-800">0.4 mm</div>
                 <div class="text-xs text-gray-500">Nozzle Size</div>
             </div>
             <div class="bg-white p-3 rounded-xl shadow-sm text-center">
@@ -114,8 +130,14 @@
     </div>
 
     <!-- Contact Support -->
-    <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20butuh%20bantuan%20tentang%20Aeroponik" target="_blank" class="block w-full bg-green-500 hover:bg-green-600 text-white text-center font-bold text-lg py-4 rounded-xl shadow-lg transition-transform transform active:scale-95 flex items-center justify-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z" /></svg>
+    <a href="https://wa.me/6281356773625?text=Halo%20Admin,%20saya%20butuh%20bantuan%20tentang%20Aeroponik"
+        target="_blank"
+        class="block w-full bg-green-500 hover:bg-green-600 text-white text-center font-bold text-lg py-4 rounded-xl shadow-lg transition-transform transform active:scale-95 flex items-center justify-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+            class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z" />
+        </svg>
         Hubungi Pendamping Desa
     </a>
 
