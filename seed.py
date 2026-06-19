@@ -17,12 +17,12 @@ from models import BaselineIdeal, BatchTanam
 # Only odd days measured
 PAPER_DAYS = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29]
 
-PAPER_TINGGI = [1.0, 1.5, 2.0, 2.5, 3.5, 5.0, 6.5, 8.5, 12.0,
+PAPER_TINGGI = [0.0, 1.5, 2.0, 2.5, 3.5, 5.0, 6.5, 8.5, 12.0,
                 15.5, 19.5, 24.5, 32.5, 39.0, 46.0]
 
 # Days 1-17 from paper, days 19-29 interpolated from exponential trend
 # Trend: ~+3/+3/+4/+5/+7/+7 progression from existing data
-PAPER_DAUN = [2, 3, 4, 5, 6, 7, 8, 9, 12,
+PAPER_DAUN = [0, 3, 4, 5, 6, 7, 8, 9, 12,
               15, 18, 22, 27, 33, 40]
 
 
